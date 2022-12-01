@@ -1,2 +1,2 @@
 # ReactTypeScript
-練習React與TypeScript
+Practice React And TypeScript

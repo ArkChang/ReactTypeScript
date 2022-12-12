@@ -1,25 +1,20 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import robots from './mockdata/robots.json'
+import Robot from "./components/Robot"
 
+// React組件的回傳值是JSX.Element，並透過ReactDOM的render去呈現畫面（在index.tsx）
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ul>
+      {
+        robots.map((r) => (
+          // 若參數屬性不同就會報錯
+          <Robot id={r.id} email={r.email} name={r.name}/>
+        ))
+      }
+    </ul>
   );
 }
 

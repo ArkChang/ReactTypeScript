@@ -18,8 +18,8 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext", //目前開發用的代碼模組，常用的有Node.js的CommonJS、ES6的esnext、requirejs的AMD
-    "moduleResolution": "node", //編譯器的工作方式，classic於2019年12月已廢除
-    "resolveJsonModule": true,
+    "moduleResolution": "node", //編譯器的工作方式，classic於2019年12月已廢除，必須要開啟
+    "resolveJsonModule": true, //讀取Json的參數，必須要開啟
     "isolatedModules": true, //編譯器會將每個文件當作單獨的模組使用
     "noEmit": true, //當編譯錯誤的時候，編譯器不會生成JavaScript代碼
     "jsx": "react-jsx" //允許編譯器支援編譯React代碼

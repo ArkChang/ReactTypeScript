@@ -1,4 +1,5 @@
 import React from "react"
+import styles from "./Robot.module.css"
 
 // 定義傳入參數的格式類型
 interface RobotProps {
@@ -24,12 +25,12 @@ const Robot: React.FC<RobotProps> = (props) => {
 
 const Robot_ES6: React.FC<RobotProps> = ({ id, name, email }) => {
   return (
-    <li>
+    <div className={styles.cardContainer}>
       {/* `符號(~按鈕)是有變數，'符號是定值 */}
       <img alt="robot" src={`https://robohash.org/${id}`} />
       <h2>{name}</h2>
       <p>{email}</p>
-    </li>
+    </div>
   )
 }
 

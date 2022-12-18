@@ -1,5 +1,6 @@
 import React from "react"
-import logo from "./logo.svg"
+// 因為在react-app.d.ts已經定義好了，故不需要在custom.d.ts重複定義
+import logo from "./assets/images/logo.svg"
 import styles from "./App.module.css";
 import robots from "./mockdata/robots.json"
 import Robot from "./components/Robot"
@@ -11,6 +12,20 @@ const jsHacked = "javascript: alert('Hacked!');"
 function App() {
   return (
     <>
+    {/* 加入CSS樣式 */}
+    <div className={styles.app}>
+      <div className={styles.appHeader}>
+        <img src={logo} className={styles.appLogo} alt="logo"/>
+        <h1>機器人拍賣online測試網站字數不足我再多補幾個字</h1>
+      </div>
+    <div className={styles.robotList}>
+      {robots.map((r) => (
+        // 若參數屬性不同就會報錯
+        <Robot id={r.id} email={r.email} name={r.name} />
+      ))}
+    </div>
+    </div>
+
     {/* JSX若使用{}來使用變數，可以避免XSS攻擊，React會自動轉譯成文字顯示 */}
     <div>{html}</div>
     {/* 但是若駭客使用函式攻擊，則無法避免XSS攻擊 */}
@@ -21,16 +36,6 @@ function App() {
         <Robot id={r.id} email={r.email} name={r.name} />
       ))}
     </ul>
-
-    {/* 加入CSS樣式 */}
-    <div className={styles.app}>
-    <div className={styles.robotList}>
-      {robots.map((r) => (
-        // 若參數屬性不同就會報錯
-        <Robot id={r.id} email={r.email} name={r.name} />
-      ))}
-    </div>
-    </div>
     </>
   )
 }

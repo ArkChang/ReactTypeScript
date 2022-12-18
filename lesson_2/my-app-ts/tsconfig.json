@@ -22,7 +22,8 @@
     "resolveJsonModule": true, //讀取Json的參數，必須要開啟
     "isolatedModules": true, //編譯器會將每個文件當作單獨的模組使用
     "noEmit": true, //當編譯錯誤的時候，編譯器不會生成JavaScript代碼
-    "jsx": "react-jsx" //允許編譯器支援編譯React代碼
+    "jsx": "react-jsx" //允許編譯器支援編譯React代碼, preserve(輸出jsx文件), react(輸出js文件), 
+                       // react-jsx(React18以後的默認模式，輸出jsx文件，底層不同), react-jsxdev(輸出jsx文件，底層不同), react-native(手機裝置)
   },
   "include": [
     "src" //** 代表任意子目錄， * 代表任意文件名

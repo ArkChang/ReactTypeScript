@@ -4,6 +4,7 @@ import logo from "./assets/images/logo.svg"
 import styles from "./App.module.css";
 import robots from "./mockdata/robots.json"
 import Robot from "./components/Robot"
+import ShopingCart from "./components/ShoppingCart"
 
 const html = "<img onerror='alert(\"Hacked!\")' src='invalid-image'/>"
 const jsHacked = "javascript: alert('Hacked!');"
@@ -18,6 +19,7 @@ function App() {
         <img src={logo} className={styles.appLogo} alt="logo"/>
         <h1>機器人拍賣online測試網站字數不足我再多補幾個字</h1>
       </div>
+      <ShopingCart/>
     <div className={styles.robotList}>
       {robots.map((r) => (
         // 若參數屬性不同就會報錯

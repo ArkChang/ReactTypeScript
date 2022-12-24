@@ -12,6 +12,10 @@ const jsHacked = "javascript: alert('Hacked!');";
 interface Props {}
 interface State {
   robotGallery: any;
+  asynchronousCount: number;
+  synchronousCount: number;
+  lifeCircleCount: number;
+  lifeCircleOKCount: number;
 }
 
 // React組件的回傳值是JSX.Element，並透過ReactDOM的render去呈現畫面（在index.tsx）
@@ -20,6 +24,10 @@ class App extends React.Component<Props, State> {
     super(props);
     this.state = {
       robotGallery: [],
+      asynchronousCount: 0,
+      synchronousCount: 0,
+      lifeCircleCount: 0,
+      lifeCircleOKCount: 0,
     };
   }
 
@@ -38,6 +46,117 @@ class App extends React.Component<Props, State> {
             <img src={logo} className={styles.appLogo} alt="logo" />
             <h1>機器人拍賣online測試網站字數不足我再多補幾個字</h1>
           </div>
+          {/* state 非同步計數方式 */}
+          <div>打開Console，可以看到計數與畫面數字不同</div>
+          <div>
+            <button
+              onClick={() => {
+                this.setState({
+                  asynchronousCount: this.state.asynchronousCount + 1,
+                });
+                console.log(
+                  "asynchronousCount :",
+                  this.state.asynchronousCount
+                );
+              }}
+            >
+              Click AsynchronousCount
+            </button>
+            <span>asynchronousCount:{this.state.asynchronousCount}</span>
+          </div>
+
+          {/* state 同步計數方式 */}
+          <div>
+            <button
+              onClick={() => {
+                this.setState(
+                  {
+                    synchronousCount: this.state.synchronousCount + 1,
+                  },
+                  () => {
+                    console.log(
+                      "synchronousCount :",
+                      this.state.synchronousCount
+                    );
+                  }
+                );
+              }}
+            >
+              Click SynchronousCount
+            </button>
+            <span>synchronousCount:{this.state.synchronousCount}</span>
+          </div>
+
+          {/* state 同步計數方式，生命週期內只會讀取舊的數值 */}
+          <div>
+            <button
+              onClick={() => {
+                this.setState(
+                  {
+                    lifeCircleCount: this.state.lifeCircleCount + 1,
+                  },
+                  () => {
+                    console.log(
+                      "lifeCircleCount :",
+                      this.state.lifeCircleCount
+                    );
+                  }
+                );
+                this.setState(
+                  {
+                    lifeCircleCount: this.state.lifeCircleCount + 1,
+                  },
+                  () => {
+                    console.log(
+                      "lifeCircleCount :",
+                      this.state.lifeCircleCount
+                    );
+                  }
+                );
+              }}
+            >
+              Click lifeCircleCount
+            </button>
+            <span>lifeCircleCount:{this.state.lifeCircleCount}</span>
+          </div>
+
+          {/* state 同步計數方式，在生命週期內用函式的方式計數，數字就會增加 */}
+          <div>
+            <button
+              onClick={() => {
+                this.setState(
+                  (preState, preProps) => {
+                    return {
+                      lifeCircleOKCount: preState.lifeCircleOKCount + 1,
+                    };
+                  },
+                  () => {
+                    console.log(
+                      "lifeCircleOKCount :",
+                      this.state.lifeCircleOKCount
+                    );
+                  }
+                );
+                this.setState(
+                  (preState, preProps) => {
+                    return {
+                      lifeCircleOKCount: preState.lifeCircleOKCount + 1,
+                    };
+                  },
+                  () => {
+                    console.log(
+                      "lifeCircleOKCount :",
+                      this.state.lifeCircleOKCount
+                    );
+                  }
+                );
+              }}
+            >
+              Click lifeCircleOKCount
+            </button>
+            <span>lifeCircleOKCount:{this.state.lifeCircleOKCount}</span>
+          </div>
+
           <ShopingCart />
           <div className={styles.robotList}>
             {this.state.robotGallery.map((r) => (

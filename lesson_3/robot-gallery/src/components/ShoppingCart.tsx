@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./ShoppingCart.module.css";
+import { FiShoppingCart } from "react-icons/fi";
 
 // 數據傳遞設定
 interface Props {}
@@ -18,16 +19,22 @@ class ShoppingCart extends React.Component<Props, State> {
     };
   }
 
+  handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    console.log("e.target :", e.target); // 事件發生的元素，範例：icon、文字
+    console.log("e.currentTarget :", e.currentTarget); // 事件處理綁定的元素，範例：Button
+    if ((e.target as HTMLElement).nodeName === "SPAN") {
+      //SPAN要大寫
+      this.setState({ isOpen: !this.state.isOpen });
+    }
+  };
+
+  // npm install react-icons 可以安裝預設圖片
   render() {
     return (
       <div className={styles.cartContainer}>
-        <button
-          className={styles.button}
-          onClick={() => {
-            this.setState({ isOpen: !this.state.isOpen });
-          }}
-        >
-          購物車2件
+        <button className={styles.button} onClick={this.handleClick}>
+          <FiShoppingCart />
+          <span>購物車2件</span>
         </button>
         <div
           className={styles.cartDropDown}

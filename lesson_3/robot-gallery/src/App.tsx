@@ -20,6 +20,7 @@ interface State {
 
 // React組件的回傳值是JSX.Element，並透過ReactDOM的render去呈現畫面（在index.tsx）
 class App extends React.Component<Props, State> {
+  // 生命週期第一階段：初始化
   constructor(props) {
     super(props);
     this.state = {
@@ -31,11 +32,28 @@ class App extends React.Component<Props, State> {
     };
   }
 
+  // 生命週期第一階段：在元件創建好DOM元素之後、掛載進頁面的時候被呼叫
   componentDidMount(): void {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
       .then((data) => this.setState({ robotGallery: data }));
   }
+
+  // 生命週期第二階段：更新
+  // 在元件接收到一個新的 props(更新後)時被呼叫
+  // state getDerivedStateFromProps(nextProps, prevState){} // 比對State更新前後的差異
+
+  // 判斷是否要UI是否要渲染，回傳為Boolean
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return nextState.some !== this.state.some;
+  // }
+
+  // 元件更新後被呼叫
+  componentDidUpdate() {}
+
+  // 生命週期第三階段：銷毀
+  // 元件銷毀的時候被呼叫，可以當作Destructor來使用，可以回收各種監聽或事件，避免元件銷毀時的記憶體洩漏
+  componentWillUnmount() {}
 
   render() {
     return (

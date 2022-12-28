@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "./assets/images/logo.svg";
 import styles from "./App.module.css";
 import robots from "./mockdata/robots.json";
@@ -13,6 +13,17 @@ interface State {
 
 const App: React.FC = (props) => {
   const [count, setCount] = useState<number>(0);
+  const [robotGallery, setRobotGallery] = useState<any>([]);
+
+  useEffect(() => {
+    document.title = `點擊${count}次`;
+  }, [count]);
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then((data) => setRobotGallery(data));
+  }, []);
 
   return (
     <div className={styles.app}>
@@ -31,11 +42,11 @@ const App: React.FC = (props) => {
       <span>Count:{count}</span>
 
       <ShopingCart />
-      {/* <div className={styles.robotList}>
-          {this.state.robotGallery.map((r) => (
-            <Robot id={r.id} email={r.email} name={r.name} />
-          ))}
-        </div> */}
+      <div className={styles.robotList}>
+        {robotGallery.map((r) => (
+          <Robot id={r.id} email={r.email} name={r.name} />
+        ))}
+      </div>
     </div>
   );
 };

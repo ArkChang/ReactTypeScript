@@ -58,7 +58,7 @@ const App: React.FC = (props) => {
       <span>Count:{count}</span>
 
       <ShopingCart />
-      {(!error || error !== "") && <div>網站出錯：{error}</div>}
+      {error && error !== "" && <div>網站出錯：{error}</div>}
       {!loading ? (
         <div className={styles.robotList}>
           {robotGallery.map((r) => (

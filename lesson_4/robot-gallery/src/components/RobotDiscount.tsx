@@ -1,23 +1,18 @@
 import React, { useContext } from "react";
 import styles from "./Robot.module.css";
 import { appContext } from "../AppState";
-import { withAddToCart } from "../components/AddToCart";
+import { useAddToCart } from "../components/AddToCart";
 
 // 定義傳入參數的格式類型
 interface RobotProps {
   id: number;
   name: string;
   email: string;
-  addToCart: (id, name) => void;
 }
 
-const RobotDiscount: React.FC<RobotProps> = ({
-  id,
-  name,
-  email,
-  addToCart,
-}) => {
+const RobotDiscount: React.FC<RobotProps> = ({ id, name, email }) => {
   const value = useContext(appContext);
+  const addToCart = useAddToCart();
 
   return (
     <div className={styles.cardContainer}>
@@ -31,4 +26,4 @@ const RobotDiscount: React.FC<RobotProps> = ({
   );
 };
 
-export default withAddToCart(RobotDiscount);
+export default RobotDiscount;
